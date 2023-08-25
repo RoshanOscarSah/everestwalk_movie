@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,8 +35,8 @@ class DetailsWidget extends StatelessWidget {
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(50),
                         bottomRight: Radius.circular(50)),
-                    child: Image.network(
-                      movie.backgroundImage,
+                    child: CachedNetworkImage(
+                      imageUrl: movie.backgroundImage,
                       fit: BoxFit.cover,
                     ),
                   )),
@@ -155,8 +156,8 @@ class DetailsWidget extends StatelessWidget {
                           width: 100,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              movie.posterImage,
+                            child: CachedNetworkImage(
+                              imageUrl: movie.posterImage,
                               fit: BoxFit.contain,
                             ),
                           )),

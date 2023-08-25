@@ -15,7 +15,6 @@ class FetchMovieListBloc extends Bloc<MovieEvent, CommonState> {
 
       if (event.query.isEmpty) {
         final res = await repository.fetchMovies();
-        print(res);
         res.fold((err) {
           emit(CommonErrorState(message: err));
         }, (data) {

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,11 +38,11 @@ class _MovieCardState extends State<MovieCard> {
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              widget.movie.posterImage,
+            child: CachedNetworkImage(
               fit: BoxFit.cover,
               height: 240,
               width: double.infinity,
+              imageUrl: widget.movie.posterImage,
             ),
           ),
         ),

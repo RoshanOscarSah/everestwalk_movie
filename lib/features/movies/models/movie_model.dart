@@ -77,8 +77,12 @@ class MovieModel {
     );
   }
 
-  String get posterImage => "https://image.tmdb.org/t/p/w500/$posterPath";
-  String get backgroundImage => "https://image.tmdb.org/t/p/w500/$backdropPath";
+  String get posterImage => posterPath == ""
+      ? 'https://media.istockphoto.com/id/1208666888/vector/marquee-and-curtain-background.jpg?s=612x612&w=0&k=20&c=VyNG1C6kfoOoH3W7cNNMmyNAlAiLuuqoQWTdDLAvA14='
+      : "https://image.tmdb.org/t/p/w500/$posterPath";
+  String get backgroundImage => backdropPath == ""
+      ? 'https://media.istockphoto.com/id/1208666888/vector/marquee-and-curtain-background.jpg?s=612x612&w=0&k=20&c=VyNG1C6kfoOoH3W7cNNMmyNAlAiLuuqoQWTdDLAvA14='
+      : "https://image.tmdb.org/t/p/w500/$backdropPath";
 
   String toJson() => json.encode(toMap());
 

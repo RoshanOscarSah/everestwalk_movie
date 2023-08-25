@@ -158,13 +158,20 @@ class _MovieWidgetState extends State<MovieWidget> {
                     return Center(
                       child: Text(
                         state.message,
-                        style: TextStyle(color: Colors.orangeAccent),
+                        style: const TextStyle(color: Colors.orangeAccent),
                       ),
                     );
                   } else if (state is CommonSuccessState<List<MovieModel>>) {
                     if (state.item.isNotEmpty) {
                       return NotificationListener<ScrollNotification>(
                         onNotification: (notification) {
+                          if (_controller.position.userScrollDirection ==
+                                  ScrollDirection.forward ||
+                              _controller.position.userScrollDirection ==
+                                  ScrollDirection.reverse) {
+                            FocusScope.of(context).unfocus();
+                          }
+
                           if (notification.metrics.pixels >=
                                   (notification.metrics.maxScrollExtent / 2) &&
                               _controller.position.userScrollDirection ==

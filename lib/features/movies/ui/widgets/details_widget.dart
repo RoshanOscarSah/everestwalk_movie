@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:everestwalk_movie/features/movies/resources/trailer_repo.dart';
+import 'package:everestwalk_movie/features/movies/ui/pages/widgets/player_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,14 +12,36 @@ import 'package:everestwalk_movie/features/movies/cubit/fetch_all_favourite_cubi
 import 'package:everestwalk_movie/features/movies/cubit/fetch_movie_list_bloc.dart';
 import 'package:everestwalk_movie/features/movies/cubit/movie_event.dart';
 import 'package:everestwalk_movie/features/movies/models/movie_model.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class DetailsWidget extends StatelessWidget {
+class DetailsWidget extends StatefulWidget {
   final MovieModel movie;
   const DetailsWidget({
     Key? key,
     required this.movie,
   }) : super(key: key);
+
+  @override
+  State<DetailsWidget> createState() => _DetailsWidgetState();
+}
+
+class _DetailsWidgetState extends State<DetailsWidget> {
+  String response = '';
+  @override
+  void initState() {
+    getVideoId();
+
+    super.initState();
+  }
+
+  void getVideoId() async {
+    response = await getTrailer(widget.movie.id);
+  }
+
+  @override
+  void dispose() {
+    response;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +61,8 @@ class DetailsWidget extends StatelessWidget {
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(50),
                         bottomRight: Radius.circular(50)),
-                    child: Image.network(
-                      movie.backgroundImage,
+                    child: CachedNetworkImage(
+                     imageUrl: widget.movie.backgroundImage,
                       fit: BoxFit.cover,
                     ),
                   )),
@@ -48,7 +72,7 @@ class DetailsWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20.0, left: 15),
                       child: Text(
-                        movie.title,
+                        widget.movie.title,
                         textAlign: TextAlign.start,
                         maxLines: 2,
                         style: const TextStyle(
@@ -66,7 +90,7 @@ class DetailsWidget extends StatelessWidget {
                     child: BlocConsumer<FavoriteCubit, CommonState>(
                       listener: (context, state) {
                         if (state is CommonSuccessState<bool>) {
-                          if (state.item != movie.favorite) {
+                          if (state.item != widget.movie.favorite) {
                             context
                                 .read<FetchMovieListBloc>()
                                 .add(ReloadMovieEvent());
@@ -81,9 +105,11 @@ class DetailsWidget extends StatelessWidget {
                               if (state.item) {
                                 context
                                     .read<FavoriteCubit>()
-                                    .unfavorite(movie.id as int);
+                                    .unfavorite(widget.movie.id as int);
                               } else {
-                                context.read<FavoriteCubit>().favorite(movie);
+                                context
+                                    .read<FavoriteCubit>()
+                                    .favorite(widget.movie);
                               }
                             },
                             icon: Icon(
@@ -106,34 +132,13 @@ class DetailsWidget extends StatelessWidget {
                     width: 80,
                     child: IconButton(
                       onPressed: () {
-                        launchURL() async {
-                          // if (Platform.isIOS) {
-                          //   if (await canLaunch(
-                          //       'youtube://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw')) {
-                          //     await launch(
-                          //         'youtube://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw',
-                          //         forceSafariVC: false);
-                          //   } else {
-                          //     if (await canLaunch(
-                          //         'https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw')) {
-                          //       await launch(
-                          //           'https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw');
-                          //     } else {
-                          //       throw 'Could not launch https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw';
-                          //     }
-                          //   }
-                          // } else {
-                          const url =
-                              'https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
-                          // }
-                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PlayerScreen(videoId: response)));
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.play_circle,
                         color: Colors.orangeAccent,
                         size: 70,
@@ -152,7 +157,7 @@ class DetailsWidget extends StatelessWidget {
                       size: 20,
                     ),
                     Text(
-                      " Average Rating:${movie.voteAverage}",
+                      " Average Rating:${widget.movie.voteAverage}",
                       textAlign: TextAlign.start,
                       maxLines: 2,
                       style: const TextStyle(
@@ -181,7 +186,7 @@ class DetailsWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 18, right: 18),
                 child: Text(
-                  movie.overview.toString(),
+                  widget.movie.overview.toString(),
                   textAlign: TextAlign.justify,
                   style: const TextStyle(
                     fontSize: 14,
@@ -201,8 +206,8 @@ class DetailsWidget extends StatelessWidget {
                           width: 100,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              movie.posterImage,
+                            child: CachedNetworkImage(
+                              imageUrl:widget.movie.posterImage,
                               fit: BoxFit.contain,
                             ),
                           )),
@@ -214,7 +219,7 @@ class DetailsWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 2.0, left: 1),
                           child: Text(
-                            "Language: ${movie.originalLanguage}",
+                            "Language: ${widget.movie.originalLanguage}",
                             textAlign: TextAlign.start,
                             maxLines: 2,
                             style: const TextStyle(
@@ -228,7 +233,7 @@ class DetailsWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 2.0, left: 1),
                           child: Text(
-                            movie.adult
+                            widget.movie.adult
                                 ? "Adult Movie: Yes"
                                 : "Adult Movie: No",
                             textAlign: TextAlign.start,
@@ -244,7 +249,7 @@ class DetailsWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0, left: 1),
                           child: Text(
-                            "Release Date: ${movie.releaseDate}",
+                            "Release Date: ${widget.movie.releaseDate}",
                             textAlign: TextAlign.start,
                             maxLines: 2,
                             style: const TextStyle(

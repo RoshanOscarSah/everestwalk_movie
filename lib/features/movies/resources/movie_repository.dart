@@ -43,15 +43,13 @@ class MovieRepository {
       final res = await apiProvider.get(
           url: '${Constants.baseUrl}/3/movie/popular',
           query: {"api_key": Constants.apiKey, "page": currentPage});
-      print(res["results"]);
-      print(res["total_pages"]);
-
       final items =
           List.from(res["results"]).map((e) => MovieModel.fromMap(e)).toList();
       totalPage = res["total_pages"];
 
       for (MovieModel singleMovie in items) {
-        final isFavorite = await databaseService.isFavorite(singleMovie.id as int);
+        final isFavorite =
+            await databaseService.isFavorite(singleMovie.id as int);
         _movies.add(singleMovie.copyWith(favorite: isFavorite));
       }
       return Right(_movies);
@@ -96,7 +94,8 @@ class MovieRepository {
           List.from(res["results"]).map((e) => MovieModel.fromMap(e)).toList();
       totalPage = res["total_pages"];
       for (MovieModel singleMovie in items) {
-        final isFavorite = await databaseService.isFavorite(singleMovie.id as int);
+        final isFavorite =
+            await databaseService.isFavorite(singleMovie.id as int);
         _movies.add(singleMovie.copyWith(favorite: isFavorite));
       }
       return Right(_movies);
