@@ -58,7 +58,7 @@ You need to install android studio, flutter, dart .
 ## Clone the repo
 
 ```sh
-$ git clone "repo link"
+$ git clone https://github.com/RoshanOscarSah/everestwalk_movie.git
 ```
 
 ## flutter
@@ -75,10 +75,11 @@ flutter run
 
 ## Screenshots
 
-<img src="https://roshansah.com.np/moviesc/1.png" height=280px width=150px><br> Home Page Screen<br><br>
-<img src="https://roshansah.com.np/moviesc/2.png" height=280px width=150px><br> Favourite Screen <br><br>
-<img src="https://roshansah.com.np/moviesc/3.png" height=280px width=150px><br> Search Movie Screen<br><br>
-<img src="https://roshansah.com.np/moviesc/4.png" height=280px width=150px><br> Movie details Screen<br><br>
+<img src="http://demo.nepaligallery.com/everestwalk_movie/1%20Home%20page.png" height=280px width=150px><br> Home Page Screen<br><br>
+<img src="http://demo.nepaligallery.com/everestwalk_movie/1%20Home%20page.png" height=280px width=150px><br> Favourite Screen <br><br>
+<img src="http://demo.nepaligallery.com/everestwalk_movie/3%20Movie%20search.png" height=280px width=150px><br> Search Movie Screen<br><br>
+<img src="http://demo.nepaligallery.com/everestwalk_movie/4%20Movie%20Detail%20Screen.png" height=280px width=150px><br> Movie details Screen<br><br>
+<img src="http://demo.nepaligallery.com/everestwalk_movie/5%20Movie%20Related%20clip.png" height=280px width=150px><br> Movie Related Clip<br><br>
 
 <!-- CONTACT -->
 
@@ -87,7 +88,6 @@ flutter run
 <a href="https://www.roshansah.com.np/">Website</a> <br>
 <a href="https://www.linkedin.com/in/destiny2jannat/">Linkedin</a><br>
 <a href="mailto:roshansah729@gmail.com">Gmail</a><br>
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
