@@ -12,10 +12,13 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#built-with">App Feature</a></li>
+        <li><a href="#built-with">Package Used</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li><a href="#set-up">Set up</a></li>
+    <li><a href="#Screenshots">ScreenShots</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
