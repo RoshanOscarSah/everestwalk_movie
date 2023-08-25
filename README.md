@@ -76,7 +76,7 @@ flutter run
 ## Screenshots
 
 <img src="http://demo.nepaligallery.com/everestwalk_movie/1%20Home%20page.png" height=280px width=150px><br> Home Page Screen<br><br>
-<img src="http://demo.nepaligallery.com/everestwalk_movie/1%20Home%20page.png" height=280px width=150px><br> Favourite Screen <br><br>
+<img src="http://demo.nepaligallery.com/everestwalk_movie/2%20Favourite.png" height=280px width=150px><br> Favourite Screen <br><br>
 <img src="http://demo.nepaligallery.com/everestwalk_movie/3%20Movie%20search.png" height=280px width=150px><br> Search Movie Screen<br><br>
 <img src="http://demo.nepaligallery.com/everestwalk_movie/4%20Movie%20Detail%20Screen.png" height=280px width=150px><br> Movie details Screen<br><br>
 <img src="http://demo.nepaligallery.com/everestwalk_movie/5%20Movie%20Related%20clip.png" height=280px width=150px><br> Movie Related Clip<br><br>
