@@ -12,8 +12,8 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">App Feature</a></li>
-        <li><a href="#built-with">Package Used</a></li>
+        <li><a href="#App-Features">App Feature</a></li>
+        <li><a href="#Packages-used">Package Used</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
